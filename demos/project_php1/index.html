@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بوابة حجوزات العيادات الطبية | Medical Reservations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #0f0d08; --card: #1d1810; --border: rgba(255,255,255,0.08); --text: #f8fafc; --muted: #a8a29e; --amber: #f59e0b; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .topbar { background: rgba(29,24,16,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0.85rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; }
+    .back-btn { padding: 0.45rem 1rem; border-radius: 99px; background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.35); text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+    .back-btn:hover { background: var(--amber); color: #000; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem; }
+    .specs { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 2rem; }
+    .spec-btn { padding: 0.5rem 1.15rem; border-radius: 99px; border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer; font-family: inherit; font-weight: 700; }
+    .spec-btn.active { background: var(--amber); color: #000; border-color: var(--amber); }
+    .docs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+    .doc-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .doc-top { display: flex; align-items: center; gap: 1rem; }
+    .doc-avatar { width: 56px; height: 56px; border-radius: 50%; background: rgba(245,158,11,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+    .slots { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .slot { padding: 0.35rem 0.7rem; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--text); font-family: inherit; font-size: 0.8rem; cursor: pointer; font-weight: 700; }
+    .slot:hover { border-color: var(--amber); color: var(--amber); }
+    .ticket { margin-top: 2rem; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.35); border-radius: 16px; padding: 1.5rem; display: none; text-align: center; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="font-size:1.5rem;">🏥</span>
+      <div>
+        <div style="font-weight:800;">المركز الطبي التخصصي للحجوزات</div>
+        <div style="font-size:0.75rem;color:var(--muted);">PHP + MySQL • اختر التخصص والوقت المناسب</div>
+      </div>
+    </div>
+    <a href="../../index.html" class="back-btn">← العودة للبورتفوليو</a>
+  </header>
+
+  <div class="container">
+    <h1 style="text-align:center;margin-bottom:1.25rem;">احجز موعدك الطبي بضغطة زر 🩺</h1>
+    <div class="specs">
+      <button class="spec-btn active" onclick="filterSpec('الكل', this)">كل التخصصات</button>
+      <button class="spec-btn" onclick="filterSpec('باطنية', this)">باطنية</button>
+      <button class="spec-btn" onclick="filterSpec('قلبية', this)">قلبية</button>
+      <button class="spec-btn" onclick="filterSpec('أطفال', this)">طب الأطفال</button>
+      <button class="spec-btn" onclick="filterSpec('عيون', this)">طب العيون</button>
+    </div>
+
+    <div class="docs-grid" id="docsGrid"></div>
+
+    <div class="ticket" id="ticketBox">
+      <h2 style="color:#34d399;margin-bottom:0.5rem;">✅ تم تأكيد حجزك بنجاح!</h2>
+      <p id="ticketDetails" style="font-size:1.05rem;"></p>
+    </div>
+  </div>
+
+  <script>
+    const DOCTORS = [
+      { name: "د. كرار الموسوي", spec: "باطنية", exp: "خبرة 12 سنة • استشاري", slots: ["04:00 م", "04:30 م", "05:15 م", "06:00 م"] },
+      { name: "د. زينب عبد الله", spec: "أطفال", exp: "أخصائية طب الأطفال وحديثي الولادة", slots: ["03:30 م", "04:15 م", "05:00 م"] },
+      { name: "د. مهند العبيدي", spec: "قلبية", exp: "بورد أمراض القلب والأوعية", slots: ["05:00 م", "05:45 م", "06:30 م"] },
+      { name: "د. نور الهدى", spec: "عيون", exp: "جراحة العيون والليزك", slots: ["04:00 م", "05:00 م", "06:15 م"] }
+    ];
+    let activeSpec = 'الكل';
+
+    function filterSpec(s, btn) {
+      activeSpec = s;
+      document.querySelectorAll('.spec-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    }
+
+    function bookSlot(docName, spec, time) {
+      const patient = prompt('أدخل اسم المريض لتثبيت الحجز:', 'محمد باقر');
+      if (!patient) return;
+      const num = Math.floor(10 + Math.random() * 89);
+      const box = document.getElementById('ticketBox');
+      document.getElementById('ticketDetails').innerHTML = `المريض: <strong>${patient}</strong> | الطبيب: <strong>${docName}</strong> (${spec}) | الساعة: <strong>${time}</strong> | رقم الدور: <strong>#${num}</strong>`;
+      box.style.display = 'block';
+      box.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function render() {
+      const grid = document.getElementById('docsGrid');
+      grid.innerHTML = '';
+      DOCTORS.filter(d => activeSpec === 'الكل' || d.spec === activeSpec).forEach(d => {
+        const card = document.createElement('div');
+        card.className = 'doc-card';
+        card.innerHTML = `
+          <div class="doc-top">
+            <div class="doc-avatar">👨‍⚕️</div>
+            <div>
+              <div style="font-weight:800;font-size:1.1rem;">${d.name}</div>
+              <div style="color:var(--amber);font-size:0.85rem;font-weight:700;">تخصص ${d.spec}</div>
+            </div>
+          </div>
+          <div style="color:var(--muted);font-size:0.85rem;">${d.exp}</div>
+          <div style="font-size:0.82rem;font-weight:700;">الأوقات المتاحة اليوم (اضغط للحجز):</div>
+          <div class="slots">
+            ${d.slots.map(t => `<button class="slot" onclick="bookSlot('${d.name}','${d.spec}','${t}')">${t}</button>`).join('')}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>

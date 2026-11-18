@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0369a1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="مشاريع محمد" />
+  
+  <title>محمد باقر | معرض المشاريع البرمجية - Portfolio</title>
+  <meta name="description" content="معرض المشاريع والأعمال البرمجية للمطور محمد باقر (mhmd-baqir). حلول برمجية متكاملة في Next.js, TypeScript, PHP, Python, والذكاء الاصطناعي." />
+  <meta name="author" content="Mohammed Baqir" />
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/291042722?v=4" />
+  <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/291042722?v=4" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="dark-theme">
+
+  <!-- Ambient Glow Effects -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="site-header" id="header">
+    <div class="nav-wrapper container">
+      <a href="#hero" class="brand-logo" aria-label="الصفحة الرئيسية">
+        <div class="avatar-box">
+          <img src="https://avatars.githubusercontent.com/u/291042722?v=4" alt="Mohammed Baqir" class="brand-avatar" />
+          <span class="online-indicator" title="متصل"></span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name" data-i18n="brand_name">محمد باقر</span>
+          <span class="brand-role" data-i18n="brand_role">مطور برمجيات & حلول ويب</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="القائمة الرئيسية">
+        <a href="#projects" class="nav-item active" data-i18n="nav_projects">المشاريع</a>
+        <a href="#skills" class="nav-item" data-i18n="nav_skills">المهارات والتقنيات</a>
+        <a href="#mobile-guide" class="nav-item" data-i18n="nav_guide">التشغيل على الهاتف</a>
+        <a href="#contact" class="nav-item" data-i18n="nav_contact">تواصل معي</a>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <!-- Language Switcher -->
+        <button id="langToggle" class="btn-icon" aria-label="تغيير اللغة" title="تبديل اللغة (English / العربية)">
+          <span class="lang-text" id="langText">EN</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button id="themeToggle" class="btn-icon" aria-label="تبديل المظهر" title="الوضع المظلم / الفاتح">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <!-- Share / Quick URL -->
+        <button id="shareBtn" class="btn-icon" aria-label="مشاركة الرابط" title="مشاركة أو نسخ الرابط للهاتف">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+
+        <!-- GitHub Link Button -->
+        <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener noreferrer" class="btn-github-nav" title="GitHub Profile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="btn-github-text">GitHub</span>
+        </a>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobileMenuBtn" class="hamburger-btn" aria-label="القائمة">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="drawer-header">
+        <div class="brand-text">
+          <span class="brand-name">محمد باقر</span>
+          <span class="brand-role">معرض المشاريع</span>
+        </div>
+        <button id="closeDrawerBtn" class="btn-close-drawer" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="drawer-links">
+        <a href="#projects" class="drawer-link" data-i18n="nav_projects">المشاريع</a>
+        <a href="#skills" class="drawer-link" data-i18n="nav_skills">المهارات والتقنيات</a>
+        <a href="#mobile-guide" class="drawer-link" data-i18n="nav_guide">التشغيل على الهاتف</a>
+        <a href="#contact" class="drawer-link" data-i18n="nav_contact">تواصل معي</a>
+        <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener noreferrer" class="drawer-link external">
+          <span>GitHub Profile</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-container">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        <span data-i18n="hero_badge">متاح للعمل والمشاريع البرمجية الجديدة</span>
+      </div>
+
+      <div class="hero-profile-row">
+        <div class="hero-avatar-wrapper">
+          <img src="https://avatars.githubusercontent.com/u/291042722?v=4" alt="محمد باقر" class="hero-avatar" />
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="hero-intro">
+          <h1 class="hero-title">
+            <span class="welcome-text" data-i18n="hero_hello">مرحباً بك، أنا</span>
+            <span class="name-gradient" data-i18n="hero_name">محمد باقر (Mohammed Baqir)</span>
+          </h1>
+          <p class="hero-subtitle" data-i18n="hero_subtitle">
+            مطور برمجيات ومواقع Full-Stack متخصص في بناء أنظمة الويب المتكاملة، تطبيقات الذكاء الاصطناعي، والمنصات التفاعلية بتقنيات Next.js، TypeScript، PHP، و Python.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="hero-cta-group">
+        <a href="#projects" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <span data-i18n="btn_explore_projects">استعراض المشاريع البرمجية</span>
+        </a>
+        <a href="#mobile-guide" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <span data-i18n="btn_mobile_ready">تثبيت وتصفح من الهاتف</span>
+        </a>
+        <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span data-i18n="btn_github_repos">حساب GitHub الرسمي</span>
+        </a>
+      </div>
+
+      <!-- Quick Stats Counter -->
+      <div class="stats-card-grid">
+        <div class="stat-box">
+          <div class="stat-number">8+</div>
+          <div class="stat-label" data-i18n="stat_projects">مشاريع برمجية متكاملة</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">5+</div>
+          <div class="stat-label" data-i18n="stat_stacks">بيئات ولغات برمجية</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label" data-i18n="stat_responsive">متوافق مع الهواتف واللابتوب</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">⚡ PWA</div>
+          <div class="stat-label" data-i18n="stat_offline">يعمل دون إنترنت وفي أي مكان</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION (MAIN HUB) -->
+  <section class="projects-section" id="projects">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-tag" data-i18n="section_tag_projects">كافة المستودعات والمشاريع</div>
+        <h2 class="section-title">
+          <span data-i18n="projects_title_prefix">معرض</span>
+          <span class="gradient-text" data-i18n="projects_title_highlight">المشاريع البرمجية</span>
+        </h2>
+        <p class="section-subtitle" data-i18n="projects_subtitle">
+          جميع مشاريعي المرفوعة على GitHub مرتبة ومنظمة مع تفاصيل التقنيات المستخدمة وروابط الكود المباشرة وإمكانية الفتح في أي لحظة.
+        </p>
+      </div>
+
+      <!-- Search & Filter Controls Bar -->
+      <div class="filter-search-container">
+        <!-- Search Input -->
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="projectSearch" placeholder="ابحث عن مشروع، لغة، تقنية..." aria-label="بحث في المشاريع" />
+          <button id="clearSearch" class="btn-clear-search" aria-label="مسح البحث" style="display: none;">✕</button>
+        </div>
+
+        <!-- Filter Category Tabs -->
+        <div class="filter-tabs" role="tablist">
+          <button class="filter-pill active" data-filter="all" data-i18n="filter_all">الكل (All)</button>
+          <button class="filter-pill" data-filter="fullstack" data-i18n="filter_fullstack">Full-Stack & Next.js</button>
+          <button class="filter-pill" data-filter="php" data-i18n="filter_php">PHP & MySQL</button>
+          <button class="filter-pill" data-filter="python" data-i18n="filter_python">Python & الذكاء الاصطناعي</button>
+          <button class="filter-pill" data-filter="frontend" data-i18n="filter_frontend">Front-End & أدوات</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projectsGrid">
+        
+        <!-- PROJECT 1: Residential Compound System -->
+        <article class="project-card featured" data-category="fullstack" data-keywords="residential وحدات سكنية next.js typescript nodejs prisma socketio postgresql عقارات">
+          <div class="card-glass-top">
+            <span class="badge featured-badge" data-i18n="badge_featured">مميز ومتقدم ⭐</span>
+            <span class="badge stack-badge">Next.js + TypeScript</span>
+          </div>
+          <div class="card-icon-header">
+            <div class="icon-avatar bg-blue">🏢</div>
+            <div class="card-header-titles">
+              <h3 class="project-card-title" data-i18n="p1_title">مشروع إدارة المجمع والوحدات السكنية</h3>
+              <span class="project-repo-name">mhmd-baqir / project_3</span>
+            </div>
+          </div>
+          <p class="project-card-desc" data-i18n="p1_desc">
+            نظام متكامل لإدارة المجمعات والوحدات السكنية والعقارات مبني بـ Next.js مع TypeScript و Node.js وقاعدة بيانات عبر Prisma ORM. يدعم التحديثات اللحظية بواسطة Socket.io وإدارة العقود والمستأجرين.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Next.js 14</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Prisma ORM</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Socket.io</span>
+            <span class="tag">Tailwind</span>
+          </div>
+          <div class="card-actions">
+            <a href="./demos/project_3/index.html" class="btn btn-sm btn-primary" style="flex:1;border-radius:var(--radius-sm);" data-i18n="btn_open_live">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>فتح وتصفح المشروع</span>
+            </a>
+            <button class="btn btn-sm btn-code btn-details" data-project="project_3" title="تفاصيل المشروع" data-i18n="btn_details_short">
+              <span>التفاصيل</span>
+            </button>
+            <a href="https://github.com/mhmd-baqir/project_3" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-code" title="عرض الكود على GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJECT 2: Graduation Projects / AI Book Recommendation -->
+        <article class="project-card featured" data-category="python" data-keywords="graduation projects python flask ai machine learning recommendation تخرج ذكاء اصطناعي كتب">
+          <div class="card-glass-top">
+            <span class="badge featured-badge" data-i18n="badge_grad">مشروع تخرج 🎓</span>
+            <span class="badge stack-badge">Python + AI / ML</span>
+          </div>
+          <div class="card-icon-header">
+            <div class="icon-avatar bg-purple">🤖</div>
+            <div class="card-header-titles">
+              <h3 class="project-card-title" data-i18n="p2_title">مشروع التخرج: نظام ترشيح الكتب بالذكاء الاصطناعي</h3>
+              <span class="project-repo-name">mhmd-baqir / graduation_projects</span>
+            </div>
+          </div>
+          <p class="project-card-desc" data-i18n="p2_desc">
+            مشروع تخرج شامل يضم نظام ذكاء اصطناعي (AI Recommender) مع Flask Server وتطبيق هاتف. يقوم بتحليل اهتمامات المستخدمين وتوليد ترشيحات كتب دقيقة بناءً على معالجة البيانات وتفضيلات القراءة.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">AI Recommender</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">REST API</span>
+            <span class="tag">Mobile App</span>
+          </div>
+          <div class="card-actions">
+            <a href="./demos/graduation_projects/index.html" class="btn btn-sm btn-primary" style="flex:1;border-radius:var(--radius-sm);" data-i18n="btn_open_live">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>فتح وتصفح المشروع</span>
+            </a>
+            <button class="btn btn-sm btn-code btn-details" data-project="graduation_projects" title="تفاصيل المشروع" data-i18n="btn_details_short">
+              <span>التفاصيل</span>
+            </button>
+            <a href="https://github.com/mhmd-baqir/graduation_projects" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-code" title="عرض الكود على GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: Supermarket E-Commerce -->
+        <article class="project-card" data-category="php" data-keywords="supermarket ecommerce php mysql متجر سوبرماركت سلة تسوق كوبونات">
+          <div class="card-glass-top">
+            <span class="badge tag-cat">E-Commerce</span>
+            <span class="badge stack-badge">PHP + MySQL</span>
+          </div>
+          <div class="card-icon-header">
+            <div class="icon-avatar bg-green">🛒</div>
+            <div class="card-header-titles">
+              <h3 class="project-card-title" data-i18n="p3_title">منصة وتطبيق السوبرماركت الإلكتروني</h3>
+              <span class="project-repo-name">mhmd-baqir / supermarket1</span>
+            </div>
+          </div>
+          <p class="project-card-desc" data-i18n="p3_desc">
+            متجر إلكتروني شامل للسوبرماركت يتضمن سلة تسوق حية (AJAX)، نظام كوبونات الخصم، حسابات المستخدمين، تسجيل الدخول عبر Google OAuth، ولوحة إدارة كاملة للمنتجات والطلبات.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Google OAuth</span>
+            <span class="tag">AJAX Cart</span>
+            <span class="tag">Admin Panel</span>
+          </div>
+          <div class="card-actions">
+            <a href="./demos/supermarket1/index.html" class="btn btn-sm btn-primary" style="flex:1;border-radius:var(--radius-sm);" data-i18n="btn_open_live">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>فتح وتصفح المشروع</span>
+            </a>
+            <button class="btn btn-sm btn-code btn-details" data-project="supermarket1" title="تفاصيل المشروع" data-i18n="btn_details_short">
+              <span>التفاصيل</span>
+            </button>
+            <a href="https://github.com/mhmd-baqir/supermarket1" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-code" title="عرض الكود على GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJECT 4: Dental Clinic System -->
+        <article class="project-card" data-category="php" data-keywords="dental clinic php mysql عيادة اسنان مواعيد مرضى حجز">
+          <div class="card-glass-top">
+            <span class="badge tag-cat">Healthcare</span>
+            <span class="badge stack-badge">PHP + MySQL</span>
+          </div>
+          <div class="card-icon-header">
+            <div class="icon-avatar bg-teal">🦷</div>
+            <div class="card-header-titles">
+              <h3 class="project-card-title" data-i18n="p4_title">نظام إدارة عيادة الأسنان والمواعيد</h3>
+              <span class="project-repo-name">mhmd-baqir / project_2</span>
+            </div>
+          </div>
+          <p class="project-card-desc" data-i18n="p4_desc">
+            نظام متقدم لإدارة عيادات طب الأسنان، حجز المواعيد إلكترونياً، متابعة السجلات الطبية للمرضى، وإدارة حسابات العيادة مع لوحة تحكم متطورة للطبيب والإدارة.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Appointments</span>
+            <span class="tag">Patients DB</span>
+            <span class="tag">Admin Suite</span>
+          </div>
+          <div class="card-actions">
+            <a href="./demos/project_2/index.html" class="btn btn-sm btn-primary" style="flex:1;border-radius:var(--radius-sm);" data-i18n="btn_open_live">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>فتح وتصفح المشروع</span>
+            </a>
+            <button class="btn btn-sm btn-code btn-details" data-project="project_2" title="تفاصيل المشروع" data-i18n="btn_details_short">
+              <span>التفاصيل</span>
+            </button>
+            <a href="https://github.com/mhmd-baqir/project_2" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-code" title="عرض الكود على GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJECT 5: Medical Clinic Booking System (project_php1) -->
+        <article class="project-card" data-category="php" data-keywords="medical clinic appointments php mysql حجوزات عيادات طبية اطباء">
+          <div class="card-glass-top">
+            <span class="badge tag-cat">Medical Portal</span>
+            <span class="badge stack-badge">PHP + Database</span>
+          </div>
+          <div class="card-icon-header">
+            <div class="icon-avatar bg-amber">🏥</div>
+            <div class="card-header-titles">
+              <h3 class="project-card-title" data-i18n="p5_title">موقع ونظام حجوزات العيادات الطبية</h3>
+              <span class="project-repo-name">mhmd-baqir / project_php1</span>
+            </div>
+          </div>
+          <p class="project-card-desc" data-i18n="p5_desc">
+            بوابة رقمية لحجز مواعيد المراكز والعيادات الطبية، تمكين المرضى من اختيار التخصص والطبيب المناسب وحجز الموعد وتأكيده مع قاعدة بيانات منظمة.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Doctor Schedule</span>
+            <span class="tag">Online Booking</span>
+          </div>
+          <div class="card-actions">
+            <a href="./demos/project_php1/index.html" class="btn btn-sm btn-primary" style="flex:1;border-radius:var(--radius-sm);" data-i18n="btn_open_live">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>فتح وتصفح المشروع</span>
+            </a>
+            <button class="btn btn-sm btn-code btn-details" data-project="project_php1" title="تفاصيل المشروع" data-i18n="btn_details_short">
+              <span>التفاصيل</span>
+            </button>
+            <a href="https://github.com/mhmd-baqir/project_php1" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-code" title="عرض الكود على GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJECT 6: Currency Converter (project_1) -->
+        <article class="project-card" data-category="frontend" data-keywords="currency converter javascript rates اسعار صرف تحويل عملات">
+          <div class="card-glass-top">
+            <span class="badge tag-cat">FinTech Tool</span>
+            <span class="badge stack-badge">JavaScript + API</span>
+          </div>
+          <div class="card-icon-header">
+            <div class="icon-avatar bg-indigo">💱</div>
+            <div class="card-header-titles">
+              <h3 class="project-card-title" data-i18n="p6_title">تطبيق تحويل العملات اللحظي</h3>
+              <span class="project-repo-name">mhmd-baqir / project_1</span>
+            </div>
+          </div>
+          <p class="project-card-desc" data-i18n="p6_desc">
+            تطبيق سريع ودقيق لحساب أسعار صرف العملات العالمية لحظة بلحظة مع واجهة تفاعلية متجاوبة تدعم التحويل بين مختلف العملات العالمية والمحلية.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">JavaScript (ES6+)</span>
+            <span class="tag">Exchange Rates API</span>
+            <span class="tag">HTML5 / CSS3</span>
+            <span class="tag">Python Server</span>
+          </div>
+          <div class="card-actions">
+            <a href="./demos/project_1/index.html" class="btn btn-sm btn-primary" style="flex:1;border-radius:var(--radius-sm);" data-i18n="btn_open_live">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>فتح وتصفح المشروع</span>
+            </a>
+            <button class="btn btn-sm btn-code btn-details" data-project="project_1" title="تفاصيل المشروع" data-i18n="btn_details_short">
+              <span>التفاصيل</span>
+            </button>
+            <a href="https://github.com/mhmd-baqir/project_1" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-code" title="عرض الكود على GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJECT 7: Portfolio Showcase Sites (portfolio & portfolio2) -->
+        <article class="project-card" data-category="frontend" data-keywords="portfolio web interactive ui ux بورتفوليو تصميم موقع شخصي">
+          <div class="card-glass-top">
+            <span class="badge tag-cat">Web Experience</span>
+            <span class="badge stack-badge">HTML + CSS + JS</span>
+          </div>
+          <div class="card-icon-header">
+            <div class="icon-avatar bg-pink">💻</div>
+            <div class="card-header-titles">
+              <h3 class="project-card-title" data-i18n="p7_title">مواقع البورتفوليو والتجارب التفاعلية</h3>
+              <span class="project-repo-name">mhmd-baqir / portfolio & portfolio2</span>
+            </div>
+          </div>
+          <p class="project-card-desc" data-i18n="p7_desc">
+            تصاميم بورتفوليو حديثة تدعم التفاعل الحركي، مؤثرات الـ Canvas والـ Particles، والتجاوب الكامل مع الهواتف الذكية لتقديم صورة احترافية للمطورين.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Responsive UI</span>
+            <span class="tag">Canvas Particles</span>
+            <span class="tag">CSS Grid / Flexbox</span>
+            <span class="tag">Fast Loading</span>
+          </div>
+          <div class="card-actions">
+            <a href="./demos/portfolio-v1/index.html" class="btn btn-sm btn-primary" style="flex:1;border-radius:var(--radius-sm);" data-i18n="btn_open_live">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>فتح وتصفح المشروع</span>
+            </a>
+            <button class="btn btn-sm btn-code btn-details" data-project="portfolio" title="تفاصيل المشروع" data-i18n="btn_details_short">
+              <span>التفاصيل</span>
+            </button>
+            <a href="https://github.com/mhmd-baqir/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-code" title="عرض الكود على GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- VIEW ALL ON GITHUB CARD -->
+        <a href="https://github.com/mhmd-baqir?tab=repositories" target="_blank" rel="noopener noreferrer" class="project-card github-hub-card">
+          <div class="hub-card-content">
+            <div class="hub-icon-big">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </div>
+            <h3 data-i18n="hub_title">جميع المستودعات على GitHub</h3>
+            <p data-i18n="hub_desc">تصفح كافة المستودعات، الأكواد، وآخر التحديثات والتعديلات على حسابي الرسمي مباشرة.</p>
+            <div class="hub-badge-arrow">
+              <span data-i18n="hub_btn">الانتقال إلى GitHub</span>
+              <span class="arrow-sym">←</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- No Results Message -->
+      <div id="noResults" class="no-results" style="display: none;">
+        <div class="no-results-icon">🔍</div>
+        <h3 data-i18n="no_results_title">لا توجد مشاريع مطابقة</h3>
+        <p data-i18n="no_results_desc">جرّب البحث بكلمة أخرى أو قم بإلغاء الفلتر الحالي.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS & TECH STACK SECTION -->
+  <section class="skills-section" id="skills">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-tag" data-i18n="skills_tag">الخبرات والقدرات</div>
+        <h2 class="section-title">
+          <span data-i18n="skills_title_prefix">التقنيات و</span>
+          <span class="gradient-text" data-i18n="skills_title_highlight">المهارات البرمجية</span>
+        </h2>
+        <p class="section-subtitle" data-i18n="skills_subtitle">
+          مجموعة الأدوات ولغات البرمجة وأطر العمل التي أستخدمها في بناء المشاريع من الصفر وحتى النشر والإطلاق.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Skill 1 -->
+        <div class="skill-category-card">
+          <div class="cat-header">
+            <span class="cat-icon">⚡</span>
+            <h3 data-i18n="cat_fullstack">تطوير Full-Stack الحديث</h3>
+          </div>
+          <p class="cat-desc" data-i18n="cat_fullstack_desc">بناء تطبيقات سريعة، تفاعلية وقابلة للتوسع بأحدث أطر العمل العالمية.</p>
+          <div class="skill-chips">
+            <span class="chip">Next.js 14/15</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">React</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">Express</span>
+            <span class="chip">Prisma ORM</span>
+            <span class="chip">Socket.io</span>
+          </div>
+        </div>
+
+        <!-- Skill 2 -->
+        <div class="skill-category-card">
+          <div class="cat-header">
+            <span class="cat-icon">🐘</span>
+            <h3 data-i18n="cat_backend">تطوير الويب بـ PHP & قواعد البيانات</h3>
+          </div>
+          <p class="cat-desc" data-i18n="cat_backend_desc">تطوير أنظمة إدارة متكاملة، مواقع تجارة إلكترونية، وربط قواعد البيانات بذكاء وأمان.</p>
+          <div class="skill-chips">
+            <span class="chip">PHP (OOP & MVC)</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">SQLite</span>
+            <span class="chip">Google OAuth 2.0</span>
+            <span class="chip">AJAX & APIs</span>
+          </div>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="skill-category-card">
+          <div class="cat-header">
+            <span class="cat-icon">🤖</span>
+            <h3 data-i18n="cat_ai">Python والذكاء الاصطناعي</h3>
+          </div>
+          <p class="cat-desc" data-i18n="cat_ai_desc">تطوير خوارزميات الترشيح والتوصية، معالجة البيانات، وبناء خوادم الـ API بالذكاء الاصطناعي.</p>
+          <div class="skill-chips">
+            <span class="chip">Python 3</span>
+            <span class="chip">Flask</span>
+            <span class="chip">Recommendation Systems</span>
+            <span class="chip">Machine Learning</span>
+            <span class="chip">Data Processing</span>
+            <span class="chip">Scikit-learn</span>
+          </div>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="skill-category-card">
+          <div class="cat-header">
+            <span class="cat-icon">📱</span>
+            <h3 data-i18n="cat_tools">التصميم المتجاوب وتجربة المستخدم</h3>
+          </div>
+          <p class="cat-desc" data-i18n="cat_tools_desc">واجهات عصرية متجاوبة مع الهواتف، اللابتوبات، مع إمكانية التثبيت السريع كـ PWA.</p>
+          <div class="skill-chips">
+            <span class="chip">PWA Ready</span>
+            <span class="chip">Mobile First</span>
+            <span class="chip">Tailwind CSS</span>
+            <span class="chip">HTML5 / CSS3</span>
+            <span class="chip">Git & GitHub</span>
+            <span class="chip">RESTful APIs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOBILE ACCESS GUIDE (HOW TO OPEN ON PHONE/LAPTOP ANYTIME) -->
+  <section class="guide-section" id="mobile-guide">
+    <div class="container">
+      <div class="guide-card">
+        <div class="guide-header">
+          <div class="guide-badge">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span data-i18n="guide_badge">سهولة الوصول والتنقل</span>
+          </div>
+          <h2 class="guide-title" data-i18n="guide_title">كيف تفتح مشاريعك وتتصفحها في أي وقت ومن أي مكان؟</h2>
+          <p class="guide-lead" data-i18n="guide_lead">
+            تم تصميم هذا البورتفوليو ليعمل كـ تطبيق ويب متقدم (PWA). يمكنك تثبيته على هاتفك (آيفون أو أندرويد) بضغطة زر ليظهر كأيقونة تطبيق مستقل في شاشتك الرئيسية، وتفتحه بأي وقت دون الحاجة لفتح المتصفح يدوياً!
+          </p>
+        </div>
+
+        <div class="guide-steps-grid">
+          <!-- Step 1 (Android) -->
+          <div class="guide-step">
+            <div class="step-num">01</div>
+            <div class="step-icon">🤖</div>
+            <h3 data-i18n="step1_title">على هواتف Android (Chrome)</h3>
+            <p data-i18n="step1_desc">افتح الرابط في متصفح Google Chrome، اضغط على النقاط الثلاث (⋮) في أعلى المتصفح، ثم اختر <strong>"إضافة إلى الشاشة الرئيسية" (Add to Home screen)</strong> أو "تثبيت التطبيق".</p>
+          </div>
+
+          <!-- Step 2 (iPhone) -->
+          <div class="guide-step">
+            <div class="step-num">02</div>
+            <div class="step-icon">🍏</div>
+            <h3 data-i18n="step2_title">على هواتف iPhone (Safari)</h3>
+            <p data-i18n="step2_desc">افتح الرابط في متصفح Safari، اضغط على أيقونة المشاركة (مربع بسهم لأعلى ⬆️)، ثم مرر للأسفل واختر <strong>"إضافة إلى الشاشة الرئيسية" (Add to Home Screen)</strong>.</p>
+          </div>
+
+          <!-- Step 3 (Laptop) -->
+          <div class="guide-step">
+            <div class="step-num">03</div>
+            <div class="step-icon">💻</div>
+            <h3 data-i18n="step3_title">على أجهزة اللابتوب والكمبيوتر</h3>
+            <p data-i18n="step3_desc">احفظ الصفحة في المفضلة (Ctrl + D) أو اضغط على علامة التثبيت الموجودة بشريط العنوان في Chrome/Edge لتشغيله كنافذة برنامج خفيف على جهازك.</p>
+          </div>
+        </div>
+
+        <!-- Quick Deploy & Share Banner -->
+        <div class="deploy-banner">
+          <div class="deploy-info">
+            <h4 data-i18n="deploy_title">🚀 رابط موقعك المباشر الدائم</h4>
+            <p data-i18n="deploy_desc">عند رفع هذه الملفات إلى مستودع GitHub Pages، سيكون موقعك متاحاً برابط دائم ومجاني مدى الحياة:</p>
+            <div class="live-url-box">
+              <code id="liveUrlPreview">https://mhmd-baqir.github.io/official-portfolio/</code>
+              <button id="copyUrlBtn" class="btn btn-sm btn-accent" data-i18n="btn_copy_url">نسخ الرابط</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & FOOTER -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <img src="https://avatars.githubusercontent.com/u/291042722?v=4" alt="Mohammed Baqir" class="brand-avatar" />
+            <div>
+              <span class="brand-name">محمد باقر</span>
+              <span class="brand-role">Software & Web Developer</span>
+            </div>
+          </div>
+          <p class="footer-tagline" data-i18n="footer_tagline">
+            مستعد دائماً لبناء مشاريع برمجية ذكية، مبتكرة، ومصممة بأعلى معايير الجودة والأداء.
+          </p>
+        </div>
+
+        <div class="footer-social-links">
+          <button id="manageUrlsBtn" class="social-link" title="ربط الروابط الحقيقية للمشاريع">
+            <span>⚙️ ربط الروابط الحقيقية</span>
+          </button>
+          <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub Profile</span>
+          </a>
+          <a href="https://github.com/mhmd-baqir?tab=repositories" target="_blank" rel="noopener noreferrer" class="social-link" title="Repositories">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>Repositories List</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">
+          © <span id="currentYear"></span> <strong>محمد باقر (mhmd-baqir)</strong>. جميع الحقوق محفوظة.
+        </p>
+        <button id="backToTop" class="btn-back-to-top" aria-label="الرجوع للأعلى">
+          <span>للأعلى</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE PROJECT DETAILS MODAL -->
+  <div class="modal-backdrop" id="projectModal" aria-hidden="true" role="dialog">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-category" id="modalCategory">Category</span>
+          <h2 class="modal-title" id="modalTitle">Project Title</h2>
+        </div>
+        <button class="btn-close-modal" id="closeModalBtn" aria-label="إغلاق">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-desc-box">
+          <h4 data-i18n="modal_about">نبذة عن المشروع</h4>
+          <p id="modalDescription" class="modal-desc-text">Description goes here.</p>
+        </div>
+
+        <div class="modal-features-box">
+          <h4 data-i18n="modal_features">أبرز الميزات والوظائف</h4>
+          <ul id="modalFeaturesList" class="features-list">
+            <!-- Dynamic features -->
+          </ul>
+        </div>
+
+        <div class="modal-tech-box">
+          <h4 data-i18n="modal_tech">التقنيات والمكتبات المستخدمة</h4>
+          <div id="modalTechBadges" class="tech-tags">
+            <!-- Dynamic badges -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="modalGithubBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span data-i18n="modal_view_repo">فتح المستودع على GitHub</span>
+        </a>
+        <button class="btn btn-secondary" id="modalDismissBtn" data-i18n="modal_close">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANAGE LIVE URLS MODAL -->
+  <div class="modal-backdrop" id="urlsModal" aria-hidden="true" role="dialog">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-category">إعدادات النشر السريع</span>
+          <h2 class="modal-title">ربط الروابط الحقيقية للمشاريع</h2>
+        </div>
+        <button class="btn-close-modal" id="closeUrlsModalBtn" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body" id="urlsFormBody" style="gap: 0.9rem;">
+        <p style="font-size:0.88rem;color:var(--text-muted);">
+          بعد نشر مشاريع الـ Backend على Render أو Vercel أو InfinityFree، الصق الرابط الحقيقي هنا ليتم حفظه وفتح المشروع الأصلي مباشرة من جهازك:
+        </p>
+        <div id="urlsInputsList" style="display:flex;flex-direction:column;gap:0.75rem;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="saveUrlsBtn">حفظ الروابط ✔</button>
+        <button class="btn btn-secondary" id="resetUrlsBtn">استعادة الافتراضي</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notification" id="toastNotification">
+    <span class="toast-message" id="toastMessage">تم نسخ الرابط بنجاح!</span>
+  </div>
+
+  <script src="./projects-config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

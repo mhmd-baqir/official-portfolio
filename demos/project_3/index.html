@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام إدارة المجمع والوحدات السكنية | معاينة حية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f19; --card: #131b2e; --border: rgba(255,255,255,0.08);
+      --text: #f1f5f9; --muted: #94a3b8; --accent: #38bdf8;
+      --green: #10b981; --amber: #f59e0b; --red: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .topbar {
+      background: rgba(19,27,46,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0.85rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1rem;
+      background: rgba(56,189,248,0.12); color: var(--accent); border: 1px solid rgba(56,189,248,0.3);
+      border-radius: 99px; text-decoration: none; font-weight: 700; font-size: 0.85rem;
+    }
+    .back-btn:hover { background: var(--accent); color: #0b0f19; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+    .stat-card .label { color: var(--muted); font-size: 0.85rem; }
+    .stat-card .val { font-size: 1.8rem; font-weight: 900; margin-top: 0.25rem; }
+    .controls { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .pill {
+      padding: 0.45rem 1rem; border-radius: 99px; border: 1px solid var(--border);
+      background: var(--card); color: var(--muted); cursor: pointer; font-family: inherit; font-weight: 700;
+    }
+    .pill.active { background: var(--accent); color: #0b0f19; border-color: var(--accent); }
+    .btn-add {
+      padding: 0.55rem 1.2rem; border-radius: 10px; border: none; background: var(--green);
+      color: #fff; font-family: inherit; font-weight: 700; cursor: pointer;
+    }
+    .layout { display: grid; grid-template-columns: 1fr 320px; gap: 1.5rem; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+    .units-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .unit-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.6rem; transition: transform 0.2s;
+    }
+    .unit-card:hover { transform: translateY(-3px); border-color: rgba(56,189,248,0.4); }
+    .unit-top { display: flex; justify-content: space-between; align-items: center; }
+    .unit-num { font-weight: 900; font-size: 1.15rem; }
+    .status-badge { font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 99px; }
+    .st-occupied { background: rgba(16,185,129,0.15); color: var(--green); }
+    .st-available { background: rgba(56,189,248,0.15); color: var(--accent); }
+    .st-maint { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .unit-meta { font-size: 0.85rem; color: var(--muted); }
+    .unit-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .btn-sm {
+      flex: 1; padding: 0.4rem; border-radius: 8px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04); color: var(--text); cursor: pointer; font-family: inherit; font-size: 0.8rem; font-weight: 700;
+    }
+    .btn-sm:hover { border-color: var(--accent); color: var(--accent); }
+    .feed-panel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; height: fit-content; }
+    .feed-title { font-size: 1rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .dot-live { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    .feed-list { display: flex; flex-direction: column; gap: 0.75rem; max-height: 420px; overflow-y: auto; }
+    .feed-item { font-size: 0.82rem; padding: 0.65rem; border-radius: 10px; background: rgba(255,255,255,0.03); border-right: 3px solid var(--accent); }
+    .feed-time { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    /* Modal */
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
+    .modal-bg.open { display: flex; }
+    .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; width: 100%; max-width: 420px; }
+    .modal h3 { margin-bottom: 1rem; }
+    .form-group { margin-bottom: 0.9rem; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="font-size:1.5rem;">🏢</span>
+      <div>
+        <div style="font-weight:800;">نظام إدارة المجمع السكني</div>
+        <div style="font-size:0.75rem;color:var(--muted);">Next.js + TypeScript + Prisma + Socket.io</div>
+      </div>
+    </div>
+    <a href="../../index.html" class="back-btn">← العودة للبورتفوليو</a>
+  </header>
+
+  <div class="container">
+    <div class="stats">
+      <div class="stat-card"><div class="label">إجمالي الوحدات</div><div class="val" id="stTotal">0</div></div>
+      <div class="stat-card"><div class="label">وحدات مؤجرة</div><div class="val" style="color:var(--green)" id="stOccupied">0</div></div>
+      <div class="stat-card"><div class="label">وحدات متاحة</div><div class="val" style="color:var(--accent)" id="stAvailable">0</div></div>
+      <div class="stat-card"><div class="label">الإيراد الشهري المتوقع</div><div class="val" style="color:var(--amber)" id="stRevenue">$0</div></div>
+    </div>
+
+    <div class="controls">
+      <div class="filters">
+        <button class="pill active" onclick="setFilter('all', this)">الكل</button>
+        <button class="pill" onclick="setFilter('available', this)">متاحة</button>
+        <button class="pill" onclick="setFilter('occupied', this)">مؤجرة</button>
+        <button class="pill" onclick="setFilter('maint', this)">تحت الصيانة</button>
+      </div>
+      <button class="btn-add" onclick="openAddModal()">+ إضافة وحدة سكنية</button>
+    </div>
+
+    <div class="layout">
+      <div class="units-grid" id="unitsGrid"></div>
+      <aside class="feed-panel">
+        <div class="feed-title"><span class="dot-live"></span> التحديثات اللحظية (Socket.io)</div>
+        <div class="feed-list" id="feedList"></div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="addModal">
+    <div class="modal">
+      <h3>إضافة وحدة سكنية جديدة</h3>
+      <div class="form-group"><label>رقم / اسم الوحدة</label><input id="uName" placeholder="مثال: شقة A-105" /></div>
+      <div class="form-group"><label>النوع والمساحة</label><input id="uType" placeholder="مثال: 3 غرف • 160م²" /></div>
+      <div class="form-group"><label>الإيجار الشهري ($)</label><input id="uPrice" type="number" value="750" /></div>
+      <div class="form-group"><label>الحالة</label>
+        <select id="uStatus">
+          <option value="available">متاحة</option>
+          <option value="occupied">مؤجرة</option>
+          <option value="maint">تحت الصيانة</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:1rem;">
+        <button class="btn-add" style="flex:1" onclick="saveNewUnit()">حفظ الوحدة</button>
+        <button class="btn-sm" onclick="closeAddModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let units = JSON.parse(localStorage.getItem('mb_units')) || [
+      { id: 1, name: 'فيلا V-01', type: 'طابقين • 320م²', price: 1450, status: 'occupied', tenant: 'أحمد كريم' },
+      { id: 2, name: 'شقة A-101', type: '3 غرف • 155م²', price: 750, status: 'available', tenant: '-' },
+      { id: 3, name: 'شقة A-102', type: 'غرفتين • 120م²', price: 600, status: 'occupied', tenant: 'سارة علي' },
+      { id: 4, name: 'شقة B-201', type: '3 غرف • 165م²', price: 800, status: 'maint', tenant: 'صيانة تكييف' },
+      { id: 5, name: 'فيلا V-02', type: 'طابقين • 350م²', price: 1600, status: 'available', tenant: '-' },
+      { id: 6, name: 'شقة B-204', type: 'غرفتين • 115م²', price: 580, status: 'occupied', tenant: 'حسين جاسم' }
+    ];
+    let currentFilter = 'all';
+
+    function addFeed(msg) {
+      const list = document.getElementById('feedList');
+      const item = document.createElement('div');
+      item.className = 'feed-item';
+      const now = new Date().toLocaleTimeString('ar-IQ', { hour: '2-digit', minute: '2-digit' });
+      item.innerHTML = `<div>${msg}</div><div class="feed-time">${now}</div>`;
+      list.prepend(item);
+    }
+
+    function render() {
+      localStorage.setItem('mb_units', JSON.stringify(units));
+      const grid = document.getElementById('unitsGrid');
+      grid.innerHTML = '';
+
+      const filtered = units.filter(u => currentFilter === 'all' || u.status === currentFilter);
+      filtered.forEach(u => {
+        const stLabel = u.status === 'occupied' ? 'مؤجرة' : u.status === 'available' ? 'متاحة' : 'صيانة';
+        const stClass = u.status === 'occupied' ? 'st-occupied' : u.status === 'available' ? 'st-available' : 'st-maint';
+        const card = document.createElement('div');
+        card.className = 'unit-card';
+        card.innerHTML = `
+          <div class="unit-top">
+            <span class="unit-num">${u.name}</span>
+            <span class="status-badge ${stClass}">${stLabel}</span>
+          </div>
+          <div class="unit-meta">${u.type}</div>
+          <div class="unit-meta">المستأجر: <strong>${u.tenant}</strong></div>
+          <div style="font-weight:800;color:var(--accent);font-size:1.05rem;">$${u.price} / شهر</div>
+          <div class="unit-actions">
+            <button class="btn-sm" onclick="toggleStatus(${u.id})">تغيير الحالة</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      document.getElementById('stTotal').textContent = units.length;
+      document.getElementById('stOccupied').textContent = units.filter(u => u.status === 'occupied').length;
+      document.getElementById('stAvailable').textContent = units.filter(u => u.status === 'available').length;
+      const rev = units.filter(u => u.status === 'occupied').reduce((s, u) => s + Number(u.price), 0);
+      document.getElementById('stRevenue').textContent = '$' + rev.toLocaleString();
+    }
+
+    function setFilter(f, btn) {
+      currentFilter = f;
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    }
+
+    function toggleStatus(id) {
+      const u = units.find(x => x.id === id);
+      if (!u) return;
+      const order = ['available', 'occupied', 'maint'];
+      u.status = order[(order.indexOf(u.status) + 1) % order.length];
+      if (u.status === 'occupied' && u.tenant === '-') u.tenant = 'مستأجر جديد';
+      if (u.status === 'available') u.tenant = '-';
+      addFeed(`تم تحديث حالة <strong>${u.name}</strong> إلى ${u.status === 'occupied' ? 'مؤجرة' : u.status === 'available' ? 'متاحة' : 'صيانة'}`);
+      render();
+    }
+
+    function openAddModal() { document.getElementById('addModal').classList.add('open'); }
+    function closeAddModal() { document.getElementById('addModal').classList.remove('open'); }
+    function saveNewUnit() {
+      const name = document.getElementById('uName').value.trim();
+      const type = document.getElementById('uType').value.trim() || '3 غرف • 150م²';
+      const price = Number(document.getElementById('uPrice').value) || 700;
+      const status = document.getElementById('uStatus').value;
+      if (!name) return alert('اكتب اسم الوحدة');
+      units.unshift({ id: Date.now(), name, type, price, status, tenant: status === 'occupied' ? 'مستأجر جديد' : '-' });
+      addFeed(`تمت إضافة وحدة جديدة: <strong>${name}</strong>`);
+      closeAddModal();
+      render();
+    }
+
+    addFeed('تم الاتصال بخادم Socket.io بنجاح');
+    addFeed('تم تحميل بيانات المجمع السكني');
+    render();
+  </script>
+</body>
+</html>

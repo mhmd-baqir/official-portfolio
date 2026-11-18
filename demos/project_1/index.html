@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محول العملات الذكي | Currency Converter</title>
+    
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="تطبيق تحويل العملات الذكي مع تحديثات أسعار الصرف الحية، يدعم العمل أوفلاين وحفظ العملات المفضلة.">
+    <meta name="keywords" content="تحويل عملات, أسعار الصرف, ريال سعودي, دولار, يورو, Converter, Currency">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Background Glow Blobs -->
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="brand-section">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-comments-dollar"></i>
+                </div>
+                <div>
+                    <h1>محوّل العملات الذكي</h1>
+                    <p class="subtitle">أسعار صرف حية وتحديثات فورية</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="home">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>محول العملات</span>
+                </button>
+                <button class="nav-tab" data-tab="news">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>أخبار العملات</span>
+                </button>
+                <button class="nav-tab" data-tab="account">
+                    <div class="nav-avatar-container">
+                        <i class="fa-solid fa-circle-user" id="nav-avatar-icon"></i>
+                        <img id="nav-avatar-img" class="hidden" src="" alt="Avatar">
+                    </div>
+                    <span id="nav-account-text">حسابي</span>
+                </button>
+            </nav>
+
+            <div class="header-controls">
+                <div id="connection-status" class="status-badge online">
+                    <span class="status-dot"></span>
+                    <span class="status-text">متصل بالشبكة</span>
+                </div>
+                <button id="theme-toggle" class="btn-icon" title="تبديل المظهر">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Offline Banner -->
+        <div id="offline-banner" class="offline-banner hidden">
+            <i class="fa-solid fa-wifi-slash"></i>
+            <span>أنت تعمل في الوضع غير المتصل. أسعار الصرف المعروضة تم تحديثها في <strong id="cached-time-display">-</strong>.</span>
+        </div>
+
+        <main>
+            <!-- ==================== TAB 1: HOME VIEW ==================== -->
+            <div id="tab-view-home" class="tab-view active-view">
+                <!-- Hero Banner Section -->
+                <section class="hero-section glass-card">
+                    <div class="hero-content">
+                        <span class="hero-tag">الخيار الذكي للمال والأعمال</span>
+                        <h1>الموقع الأفضل لتحويل العملات</h1>
+                        <p>تحويل آمن وفوري لأسعار الصرف العالمية مع دعم كامل للعمل بدون اتصال بالإنترنت (Offline). يتيح لك التطبيق تسجيل الدخول، وإنشاء ملف تعريف بروفايل مخصص لإدارة سجل المعاملات وحفظ عملياتك المفضلة وكتابة ملاحظات تفصيلية عليها لحفظها في قاعدة البيانات بأمان.</p>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <img src="currency_hero_banner.png" alt="Best Currency Converter Hero" class="hero-img">
+                    </div>
+                </section>
+
+                <!-- Centered Main Converter Section -->
+                <div class="converter-wrapper-centered">
+                    <section class="converter-section">
+                        <div class="glass-card main-converter-card">
+                            <!-- Conversion Input Form -->
+                            <div class="converter-grid">
+                                <!-- Source Currency -->
+                                <div class="input-group">
+                                    <label for="amount-input">المبلغ المُراد تحويله</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="amount-input" value="100" min="0" placeholder="أدخل القيمة" step="any">
+                                        <button type="button" class="currency-selector-trigger" id="from-currency-trigger">
+                                            <img src="https://flagcdn.com/w40/us.png" alt="USD Flag" class="flag-icon" id="from-flag">
+                                            <span class="currency-code" id="from-code">USD</span>
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Swap Button -->
+                                <div class="swap-action-container">
+                                    <button id="swap-btn" class="btn-swap" title="عكس العملات">
+                                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Target Currency -->
+                                <div class="input-group">
+                                    <label for="result-display">النتيجة المحسوبة</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="result-display" readonly placeholder="0.00">
+                                        <button type="button" class="currency-selector-trigger" id="to-currency-trigger">
+                                            <img src="https://flagcdn.com/w40/sa.png" alt="SAR Flag" class="flag-icon" id="to-flag">
+                                            <span class="currency-code" id="to-code">SAR</span>
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Meta Information & Actions -->
+                            <div class="card-footer">
+                                <div class="exchange-rate-display">
+                                    <div id="rate-formula-primary" class="rate-formula">1 USD = 3.7500 SAR</div>
+                                    <div id="rate-formula-secondary" class="rate-formula sub-rate">1 SAR = 0.2667 USD</div>
+                                </div>
+                                <div class="footer-actions">
+                                    <button id="save-note-trigger-btn" class="btn-icon btn-save-note" title="حفظ المعاملة مع ملاحظة">
+                                        <i class="fa-solid fa-bookmark"></i>
+                                    </button>
+                                    <button id="favorite-toggle-btn" class="btn-icon btn-favorite" title="إضافة للعملات المفضلة">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                    <button id="refresh-btn" class="btn-icon btn-refresh" title="تحديث الأسعار الآن">
+                                        <i class="fa-solid fa-arrows-rotate"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Bottom Dashboards Grid (3 Columns) -->
+                <div class="bottom-dashboard-grid">
+                    <!-- Column 1: Favorites -->
+                    <section class="favorites-section dashboard-card-col">
+                        <div class="section-header">
+                            <h2>العملات المفضلة</h2>
+                            <span class="count-badge" id="favorites-count">0</span>
+                        </div>
+                        <div class="favorites-empty-state" id="favorites-empty">
+                            <i class="fa-regular fa-star"></i>
+                            <p>لم تقم بإضافة عملات مفضلة بعد. انقر على القلب لحفظ أزواج العملات الشائعة.</p>
+                        </div>
+                        <div class="favorites-grid hidden" id="favorites-grid">
+                            <!-- Dynamic Favorite Cards -->
+                        </div>
+                    </section>
+
+                    <!-- Column 2: Recent History -->
+                    <section class="history-section dashboard-card-col">
+                        <div class="section-header">
+                            <h2>سجل العمليات الأخيرة</h2>
+                            <button id="clear-history-btn" class="btn-text-action hidden">مسح</button>
+                        </div>
+                        <div class="history-empty-state" id="history-empty">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <p>لا يوجد عمليات تحويل سابقة في السجل لهذا المستخدم.</p>
+                        </div>
+                        <div class="history-list-container hidden" id="history-list">
+                            <!-- Dynamic History rows -->
+                        </div>
+                    </section>
+
+                    <!-- Column 3: Rate Board Matrix -->
+                    <section class="rate-board-section dashboard-card-col">
+                        <div class="section-header">
+                            <h2>أسعار الصرف العالمية</h2>
+                            <span class="update-time-text">مقارنة بـ <strong id="matrix-base-code">USD</strong></span>
+                        </div>
+                        <div class="rate-matrix-grid" id="rate-matrix-grid">
+                            <!-- Dynamic Matrix Cards loaded via JS -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- ==================== TAB 2: NEWS VIEW ==================== -->
+            <div id="tab-view-news" class="tab-view hidden-view">
+                <section class="news-section">
+                    <div class="section-header">
+                        <h2>الأخبار المالية وأسعار الصرف</h2>
+                        <span class="update-time-text">آخر المستجدات والتحليلات لأسواق العملات المحلية والعالمية</span>
+                    </div>
+                    
+                    <!-- News Category Filter Tabs -->
+                    <div class="news-filter-tabs">
+                        <button class="news-filter-btn active" data-category="all">
+                            <i class="fa-solid fa-list"></i>
+                            الكل
+                        </button>
+                        <button class="news-filter-btn" data-category="global">
+                            <i class="fa-solid fa-globe"></i>
+                            أخبار عالمية
+                        </button>
+                        <button class="news-filter-btn" data-category="local">
+                            <i class="fa-solid fa-building-columns"></i>
+                            أخبار محلية
+                        </button>
+                    </div>
+
+                    <div class="news-grid" id="news-grid-container">
+                        <!-- Dynamic News Cards from JS -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- ==================== TAB 3: ACCOUNT VIEW ==================== -->
+            <div id="tab-view-account" class="tab-view hidden-view">
+                <!-- 3A: Dedicated Login/Register View -->
+                <div id="view-login-form" class="login-page-container">
+                    <div class="glass-card login-card">
+                        <!-- Form Selector Tabs -->
+                        <div class="auth-tabs">
+                            <button id="auth-tab-login" class="auth-tab active">تسجيل الدخول</button>
+                            <button id="auth-tab-register" class="auth-tab">إنشاء حساب</button>
+                        </div>
+                        
+                        <!-- 1. SIGN IN FORM -->
+                        <div id="form-login-block" class="auth-form-block">
+                            <div class="login-header">
+                                <div class="login-icon">
+                                    <i class="fa-solid fa-user-shield"></i>
+                                </div>
+                                <h2>تسجيل الدخول للحساب</h2>
+                                <p>ادخل بريدك الإلكتروني وكلمة المرور للوصول إلى تحويلاتك المحفوظة وإحصائياتك.</p>
+                            </div>
+                            <div class="login-form-body">
+                                <div class="input-group">
+                                    <label>طريقة تسجيل الدخول</label>
+                                    <div class="contact-method-toggle" id="login-contact-toggle">
+                                        <button type="button" class="toggle-btn active" data-type="email"><i class="fa-solid fa-envelope"></i> بريد إلكتروني</button>
+                                        <button type="button" class="toggle-btn" data-type="phone"><i class="fa-solid fa-phone"></i> رقم هاتف</button>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="login-contact-input-group">
+                                    <label id="login-contact-label" for="login-email-input">البريد الإلكتروني (Gmail)</label>
+                                    <div class="input-wrapper">
+                                        <input type="email" id="login-email-input" placeholder="example@gmail.com" autocomplete="off">
+                                        <span class="input-icon-decor" id="login-contact-icon"><i class="fa-solid fa-envelope"></i></span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="login-password-input">كلمة المرور</label>
+                                    <div class="input-wrapper">
+                                        <input type="password" id="login-password-input" placeholder="••••••••" autocomplete="off">
+                                        <span class="input-icon-decor"><i class="fa-solid fa-lock"></i></span>
+                                    </div>
+                                </div>
+                                <button id="login-submit-btn" class="btn-primary login-btn">تسجيل الدخول</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 2. REGISTER FORM -->
+                        <div id="form-register-block" class="auth-form-block hidden">
+                            <div class="login-header">
+                                <div class="login-icon">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                </div>
+                                <h2>إنشاء حساب جديد</h2>
+                                <p>سجل حساباً مجانياً لحفظ المعاملات، وتفعيل إشعارات الأسعار وتصدير البيانات.</p>
+                            </div>
+                            <div class="login-form-body">
+                                <div class="input-group">
+                                    <label for="register-username-input">اسم المستخدم (Username)</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="register-username-input" placeholder="yousef_12" autocomplete="off">
+                                        <span class="input-icon-decor"><i class="fa-solid fa-user"></i></span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>وسيلة التواصل المفضلة</label>
+                                    <div class="contact-method-toggle" id="register-contact-toggle">
+                                        <button type="button" class="toggle-btn active" data-type="email"><i class="fa-solid fa-envelope"></i> بريد إلكتروني</button>
+                                        <button type="button" class="toggle-btn" data-type="phone"><i class="fa-solid fa-phone"></i> رقم الهاتف</button>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="register-contact-input-group">
+                                    <label id="register-contact-label" for="register-email-input">البريد الإلكتروني (Gmail)</label>
+                                    <div class="input-wrapper">
+                                        <input type="email" id="register-email-input" placeholder="example@gmail.com" autocomplete="off">
+                                        <span class="input-icon-decor" id="register-contact-icon"><i class="fa-solid fa-envelope"></i></span>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="register-password-input">كلمة المرور (Password)</label>
+                                    <div class="input-wrapper">
+                                        <input type="password" id="register-password-input" placeholder="أدخل كلمة مرور قوية..." autocomplete="off">
+                                        <span class="input-icon-decor"><i class="fa-solid fa-lock"></i></span>
+                                    </div>
+                                </div>
+                                <button id="register-submit-btn" class="btn-primary login-btn">إنشاء الحساب وتفعيله</button>
+                            </div>
+                        </div>
+                        
+                        <div class="login-benefits">
+                            <h3>🎁 ميزات الحسابات الاحترافية:</h3>
+                            <ul>
+                                <li><i class="fa-solid fa-circle-check"></i> حفظ غير محدود للمعاملات مع كتابة وتعديل ملاحظات مخصصة.</li>
+                                <li><i class="fa-solid fa-circle-check"></i> إشعارات وتنبيهات أسعار الصرف الحية عند الوصول للمستهدف.</li>
+                                <li><i class="fa-solid fa-circle-check"></i> تصدير وحفظ كامل التقارير المالية بصيغة CSV مجاناً.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3B: Profile & Exclusive Dashboards (Shown when logged in) -->
+                <div id="view-profile-dashboard" class="profile-dashboard-layout hidden-view">
+                    <!-- Sidebar: Profile Stats & Alerts -->
+                    <div class="profile-sidebar-col">
+                        <!-- User Profile Card -->
+                        <section class="profile-section">
+                            <div class="glass-card profile-card">
+                                <div class="profile-header">
+                                    <div class="profile-avatar-container">
+                                        <div class="profile-avatar" id="profile-avatar">
+                                            <img id="profile-avatar-img" class="hidden" src="" alt="Avatar">
+                                            <span id="profile-avatar-initials">G</span>
+                                        </div>
+                                        <label for="avatar-upload-input" class="avatar-upload-label" title="تغيير الصورة الشخصية">
+                                            <i class="fa-solid fa-camera"></i>
+                                        </label>
+                                        <input type="file" id="avatar-upload-input" accept="image/*" class="hidden">
+                                    </div>
+                                    <div class="profile-info">
+                                        <h3 id="profile-username">guest</h3>
+                                        <p class="join-date">عضو منذ: <span id="profile-join-date">-</span></p>
+                                    </div>
+                                    <button id="logout-btn" class="btn-logout" title="تسجيل الخروج">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                    </button>
+                                </div>
+                                <div class="profile-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-val" id="stat-saved-count">0</span>
+                                        <span class="stat-lbl">المعاملات الملاحظة</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-val" id="stat-favorites-count">0</span>
+                                        <span class="stat-lbl">الأزواج المفضلة</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-val" id="stat-history-count">0</span>
+                                        <span class="stat-lbl">التحويلات التلقائية</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Price Alerts Manager (Exclusive Benefit) -->
+                        <section class="alerts-section">
+                            <div class="section-header">
+                                <h2>تنبيهات أسعار الصرف</h2>
+                                <button id="add-alert-trigger-btn" class="btn-text-action" style="color:var(--accent-hover); font-size:0.8rem;">
+                                    <i class="fa-solid fa-circle-plus"></i> تنبيه جديد
+                                </button>
+                            </div>
+                            <div class="glass-card alerts-card-container" style="padding: 1.2rem; min-height: 180px;">
+                                <div class="alerts-empty-state" id="alerts-empty">
+                                    <i class="fa-regular fa-bell"></i>
+                                    <p style="font-size: 0.8rem; text-align: center; color: var(--text-secondary); line-height: 1.5;">لا يوجد تنبيهات نشطة حالياً. أنشئ تنبيهاً لتصلك إشعارات فورية عند وصول العملة لسعر صرف محدد.</p>
+                                </div>
+                                <div class="alerts-list hidden" id="alerts-list-container">
+                                    <!-- Dynamic alerts served via JS -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Main Dashboard: Saved notes list & Utilities -->
+                    <div class="profile-main-col">
+                        <!-- Saved Transactions with Custom Notes -->
+                        <section class="saved-notes-section">
+                            <div class="section-header">
+                                <h2>المعاملات المحفوظة مع ملاحظات</h2>
+                                <span class="count-badge" id="saved-notes-count">0</span>
+                            </div>
+                            <div class="saved-notes-empty-state" id="saved-notes-empty">
+                                <i class="fa-regular fa-clipboard"></i>
+                                <p>لا يوجد معاملات محفوظة بملاحظات. استخدم زر الحفظ المرجعي <i class="fa-solid fa-bookmark"></i> في بطاقة التحويل بالصفحة الرئيسية لحفظ العمليات وكتابة ملاحظات عليها.</p>
+                            </div>
+                            <div class="saved-notes-list-container hidden" id="saved-notes-list">
+                                <!-- Dynamic Saved conversions cards served via JS -->
+                            </div>
+                        </section>
+
+                        <!-- Premium Member Tools -->
+                        <section class="premium-tools-section">
+                            <div class="section-header">
+                                <h2>أدوات التقارير المالية</h2>
+                            </div>
+                            <div class="glass-card premium-tools-card" style="padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; border-right: 4px solid var(--success);">
+                                <div>
+                                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem;">تصدير سجل المعاملات المالي</h3>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary);">قم بتنزيل تقرير مالي كامل لسجل تحويلاتك ومعاملاتك الملاحظة لاستخدامها في التحليلات أو برامج الحسابات الخارجية.</p>
+                                </div>
+                                <button id="btn-export-report" class="btn-note-action restore" style="width: auto; padding: 0.6rem 1.2rem; gap: 0.5rem;" title="تصدير التقرير">
+                                    <i class="fa-solid fa-file-csv"></i>
+                                    <span style="font-size: 0.85rem; font-weight: 700;">تصدير CSV</span>
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>تطبيق محول العملات الذكي &copy; 2026. تحديثات الأسعار مقدمة عبر ExchangeRate API.</p>
+            <p class="tech-stack">مبني باستخدام HTML5 &bull; CSS3 &bull; JS (ES6) &bull; LocalStorage &bull; Offline Ready</p>
+        </footer>
+    </div>
+
+    <!-- Currency Selector Modal (Slide-up / Fade Modal) -->
+    <div id="currency-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>اختر العملة</h3>
+                <button id="modal-close-btn" class="btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-search-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="currency-search-input" placeholder="ابحث باسم العملة أو رمزها (مثال: USD, ريال)..." autocomplete="off">
+            </div>
+            <div class="currency-list" id="currency-modal-list">
+                <!-- Dynamically generated list items -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Save/Edit Note Modal Dialog -->
+    <div id="save-note-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-height: 380px;">
+            <div class="modal-header">
+                <h3 id="note-modal-title">حفظ المعاملة مع ملاحظة</h3>
+                <button id="save-note-modal-close-btn" class="btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body-custom" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                <div style="font-size:0.95rem; color:var(--text-secondary); background:rgba(255,255,255,0.02); border:1px solid var(--glass-border); padding:0.8rem 1rem; border-radius:var(--radius-md); font-family:var(--font-en); display:flex; justify-content:center; align-items:center; font-weight:600;" id="note-modal-conversion-display">
+                    100 USD = 375.00 SAR
+                </div>
+                <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                    <label for="conversion-note-input" style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">أكتب ملاحظتك المخصصة (مثال: فاتورة السفر، إيجار السيرفر):</label>
+                    <input type="text" id="conversion-note-input" placeholder="اكتب الملاحظة هنا..." autocomplete="off" style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: var(--radius-md); padding: 0.8rem 1rem; color: var(--text-primary); font-size: 0.95rem; outline: none; transition: var(--transition-fast);">
+                </div>
+                <button id="confirm-save-note-btn" class="btn-primary" style="width:100%; padding:0.8rem; border-radius:var(--radius-md); border:none; background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); color:#fff; font-weight:600; cursor:pointer; font-family:var(--font-ar); transition:var(--transition-fast);">حفظ التعديلات</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Price Alert Modal Dialog -->
+    <div id="add-alert-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-height: 400px;">
+            <div class="modal-header">
+                <h3>إنشاء تنبيه لسعر الصرف</h3>
+                <button id="add-alert-modal-close-btn" class="btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body-custom" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                        <label style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">العملة الأساسية</label>
+                        <button type="button" class="currency-selector-trigger" id="alert-from-trigger" style="width:100%; border:1px solid var(--input-border); border-radius:var(--radius-md); padding:0.6rem 0.8rem; border-right:none;">
+                            <span class="currency-code" id="alert-from-code">USD</span>
+                            <i class="fa-solid fa-chevron-down" style="margin-right:auto; font-size:0.7rem;"></i>
+                        </button>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                        <label style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">العملة المستهدفة</label>
+                        <button type="button" class="currency-selector-trigger" id="alert-to-trigger" style="width:100%; border:1px solid var(--input-border); border-radius:var(--radius-md); padding:0.6rem 0.8rem; border-right:none;">
+                            <span class="currency-code" id="alert-to-code">SAR</span>
+                            <i class="fa-solid fa-chevron-down" style="margin-right:auto; font-size:0.7rem;"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                    <label for="alert-target-input" style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">نبهني عندما يصل سعر الصرف إلى (المستهدف):</label>
+                    <input type="number" id="alert-target-input" placeholder="أدخل السعر المستهدف (مثال: 3.82)" step="any" min="0" style="width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: var(--radius-md); padding: 0.8rem 1rem; color: var(--text-primary); font-family: var(--font-en); font-weight: 500; font-size: 0.95rem; outline: none;">
+                </div>
+                <button id="confirm-save-alert-btn" class="btn-primary" style="width:100%; padding:0.8rem; border-radius:var(--radius-md); border:none; background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); color:#fff; font-weight:600; cursor:pointer;">تفعيل التنبيه</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- App Logic script -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mohammed Baqir Nazar – Web Developer portfolio showcasing PHP, JavaScript, and Python projects." />
+  <meta name="keywords" content="Mohammed Baqir Nazar, Web Developer, PHP, JavaScript, Python, Portfolio" />
+  <meta property="og:title" content="Mohammed Baqir Nazar | Web Developer" />
+  <meta property="og:description" content="Personal portfolio of Mohammed Baqir Nazar, a passionate Web Developer." />
+  <title>Mohammed Baqir Nazar | Web Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- CURSOR GLOW -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- PARTICLES -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo" id="nav-logo-link">
+        <span class="logo-bracket">&lt;</span>MBN<span class="logo-bracket">/&gt;</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link" id="nav-about">About</a></li>
+        <li><a href="#skills" class="nav-link" id="nav-skills">Skills</a></li>
+        <li><a href="#projects" class="nav-link" id="nav-projects">Projects</a></li>
+        <li><a href="#contact" class="nav-link" id="nav-contact">Contact</a></li>
+      </ul>
+      <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener" class="btn btn-ghost nav-cta" id="github-nav-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Available for work
+      </div>
+      <h1 class="hero-title">
+        <span class="hero-greeting">Hi, I'm</span>
+        <span class="hero-name gradient-text">Mohammed Baqir Nazar</span>
+      </h1>
+      <p class="hero-role">
+        <span class="typewriter" id="typewriter"></span>
+        <span class="cursor-blink">|</span>
+      </p>
+      <p class="hero-desc">
+        Passionate Web Developer crafting elegant, high-performance web experiences.
+        From dynamic PHP backends to interactive JavaScript frontends — I bring ideas to life.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary" id="view-projects-btn">
+          View Projects
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-outline" id="contact-me-btn">Contact Me</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num" data-target="6">0</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="4">0</span>
+          <span class="stat-label">Languages</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="100">0</span>
+          <span class="stat-label">% Passion</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="code-card" id="code-card">
+        <div class="code-card-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="code-filename">developer.js</span>
+        </div>
+        <pre class="code-body"><code><span class="c-keyword">const</span> <span class="c-var">developer</span> = {
+  <span class="c-prop">name</span>: <span class="c-str">"Mohammed Baqir"</span>,
+  <span class="c-prop">role</span>: <span class="c-str">"Full Stack Developer"</span>,
+  <span class="c-prop">skills</span>: [
+    <span class="c-str">"Next.js"</span>, <span class="c-str">"TypeScript"</span>,
+    <span class="c-str">"PHP"</span>, <span class="c-str">"JavaScript"</span>,
+    <span class="c-str">"Python"</span>, <span class="c-str">"MySQL"</span>
+  ],
+  <span class="c-prop">passion</span>: <span class="c-str">"Building great UX"</span>,
+  <span class="c-prop">available</span>: <span class="c-bool">true</span>
+};</code></pre>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Scroll down</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Who I Am</span>
+        <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-avatar-wrapper">
+          <div class="about-avatar">
+            <img src="https://avatars.githubusercontent.com/u/291042722?v=4" alt="Mohammed Baqir Nazar" class="avatar-img" id="profile-avatar" />
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring ring-2"></div>
+          </div>
+          <div class="about-socials">
+            <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener" class="social-btn" id="about-github-btn" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="about-text">
+          <p class="about-lead">
+            I'm a dedicated <strong>Web Developer</strong> with a strong passion for building
+            functional and visually appealing web applications.
+          </p>
+          <p class="about-body">
+            My journey in web development spans across multiple domains — from building
+            full-stack residential compound platforms and medical clinic booking systems to
+            supermarket websites and currency converter apps. I love solving real-world
+            problems through clean, efficient code.
+          </p>
+          <p class="about-body">
+            Whether it's a dynamic PHP backend, an interactive JavaScript frontend,
+            or data-driven Python solutions, I approach every project with dedication
+            and attention to detail.
+          </p>
+          <div class="about-cards">
+            <div class="about-card" id="about-card-backend">
+              <div class="about-card-icon">&#9881;&#65039;</div>
+              <div>
+                <strong>Backend Dev</strong>
+                <p>PHP &amp; MySQL</p>
+              </div>
+            </div>
+            <div class="about-card" id="about-card-frontend">
+              <div class="about-card-icon">&#127912;</div>
+              <div>
+                <strong>Frontend Dev</strong>
+                <p>HTML, CSS &amp; JS</p>
+              </div>
+            </div>
+            <div class="about-card" id="about-card-problem">
+              <div class="about-card-icon">&#129513;</div>
+              <div>
+                <strong>Problem Solver</strong>
+                <p>Clean &amp; Efficient Code</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section skills-section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I Know</span>
+        <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-card" id="skill-php">
+          <div class="skill-icon-box" style="--icon-color: #7b68ee;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight:700; color:#7b68ee;">PHP</span>
+          </div>
+          <div class="skill-info">
+            <div class="skill-header"><span>PHP</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--fill:85%; --color:#7b68ee;"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card" id="skill-js">
+          <div class="skill-icon-box" style="--icon-color: #f0db4f;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight:700; color:#f0db4f;">JS</span>
+          </div>
+          <div class="skill-info">
+            <div class="skill-header"><span>JavaScript</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--fill:80%; --color:#f0db4f;"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card" id="skill-ts">
+          <div class="skill-icon-box" style="--icon-color: #3178c6;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight:700; color:#3178c6;">TS</span>
+          </div>
+          <div class="skill-info">
+            <div class="skill-header"><span>TypeScript / Next.js</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--fill:80%; --color:#3178c6;"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card" id="skill-python">
+          <div class="skill-icon-box" style="--icon-color: #3776ab;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight:700; color:#3776ab;">PY</span>
+          </div>
+          <div class="skill-info">
+            <div class="skill-header"><span>Python</span><span class="skill-pct">70%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--fill:70%; --color:#3776ab;"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card" id="skill-mysql">
+          <div class="skill-icon-box" style="--icon-color: #00c2db;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight:700; color:#00c2db;">SQL</span>
+          </div>
+          <div class="skill-info">
+            <div class="skill-header"><span>MySQL</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--fill:80%; --color:#00c2db;"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card" id="skill-html">
+          <div class="skill-icon-box" style="--icon-color: #e34c26;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight:700; color:#e34c26;">HTML</span>
+          </div>
+          <div class="skill-info">
+            <div class="skill-header"><span>HTML / CSS</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--fill:90%; --color:#e34c26;"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card" id="skill-git">
+          <div class="skill-icon-box" style="--icon-color: #f05033;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight:700; color:#f05033;">GIT</span>
+          </div>
+          <div class="skill-info">
+            <div class="skill-header"><span>Git / GitHub</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="--fill:75%; --color:#f05033;"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section projects-section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I've Built</span>
+        <h2 class="section-title">My <span class="gradient-text">Projects</span></h2>
+      </div>
+      <div class="projects-grid">
+
+        <article class="project-card featured" id="project-residential">
+          <div class="project-featured-badge">&#11088; New &amp; Featured</div>
+          <div class="project-card-header">
+            <div class="project-icon">&#x1F3E2;</div>
+            <div class="project-tags">
+              <span class="tag tag-next">Next.js</span>
+              <span class="tag tag-ts">TypeScript</span>
+              <span class="tag tag-node">Node.js</span>
+            </div>
+          </div>
+          <h3 class="project-title">Residential Compound System</h3>
+          <p class="project-desc">
+            A full-stack management system for residential compounds built with Next.js,
+            TypeScript, Node.js, Prisma ORM, and Socket.io for real-time housing unit management &amp; analytics.
+          </p>
+          <div class="project-footer">
+            <a href="https://github.com/mhmd-baqir/project_3" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="residential-github-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Code
+            </a>
+          </div>
+          <div class="project-glow"></div>
+        </article>
+
+        <article class="project-card" id="project-dental">
+          <div class="project-card-header">
+            <div class="project-icon">&#x1F9B7;</div>
+            <div class="project-tags">
+              <span class="tag tag-php">PHP</span>
+              <span class="tag tag-mysql">MySQL</span>
+            </div>
+          </div>
+          <h3 class="project-title">Dental Clinic System</h3>
+          <p class="project-desc">
+            A comprehensive dental clinic management system with patient records,
+            appointment booking, and admin dashboard for streamlined clinic operations.
+          </p>
+          <div class="project-footer">
+            <a href="https://github.com/mhmd-baqir/project_2" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="dental-github-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Code
+            </a>
+          </div>
+          <div class="project-glow"></div>
+        </article>
+
+        <article class="project-card" id="project-supermarket">
+          <div class="project-card-header">
+            <div class="project-icon">&#x1F6D2;</div>
+            <div class="project-tags">
+              <span class="tag tag-php">PHP</span>
+              <span class="tag tag-mysql">MySQL</span>
+            </div>
+          </div>
+          <h3 class="project-title">Supermarket Website</h3>
+          <p class="project-desc">
+            A fully-featured supermarket e-commerce platform with product catalog,
+            shopping cart, user authentication, and inventory management system.
+          </p>
+          <div class="project-footer">
+            <a href="https://github.com/mhmd-baqir/supermarket1" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="supermarket-github-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Code
+            </a>
+          </div>
+          <div class="project-glow"></div>
+        </article>
+
+        <article class="project-card featured" id="project-medical">
+          <div class="project-featured-badge">&#11088; Featured</div>
+          <div class="project-card-header">
+            <div class="project-icon">&#x1F3E5;</div>
+            <div class="project-tags">
+              <span class="tag tag-php">PHP</span>
+              <span class="tag tag-mysql">MySQL</span>
+              <span class="tag tag-css">CSS</span>
+            </div>
+          </div>
+          <h3 class="project-title">Medical Clinic Booking</h3>
+          <p class="project-desc">
+            A complete online appointment booking system for medical clinics.
+            Features doctor profiles, time-slot management, patient portal,
+            and real-time availability tracking.
+          </p>
+          <div class="project-footer">
+            <a href="https://github.com/mhmd-baqir/project_php1" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="medical-github-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Code
+            </a>
+          </div>
+          <div class="project-glow"></div>
+        </article>
+
+        <article class="project-card" id="project-currency">
+          <div class="project-card-header">
+            <div class="project-icon">&#x1F4B1;</div>
+            <div class="project-tags">
+              <span class="tag tag-js">JavaScript</span>
+              <span class="tag tag-html">HTML</span>
+            </div>
+          </div>
+          <h3 class="project-title">Currency Converter App</h3>
+          <p class="project-desc">
+            A real-time currency converter application with live exchange rates,
+            multi-currency support, and a clean responsive interface for
+            effortless financial calculations.
+          </p>
+          <div class="project-footer">
+            <a href="https://github.com/mhmd-baqir/project_1" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="currency-github-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Code
+            </a>
+          </div>
+          <div class="project-glow"></div>
+        </article>
+
+        <article class="project-card" id="project-graduation">
+          <div class="project-card-header">
+            <div class="project-icon">&#x1F393;</div>
+            <div class="project-tags">
+              <span class="tag tag-python">Python</span>
+            </div>
+          </div>
+          <h3 class="project-title">Graduation Projects</h3>
+          <p class="project-desc">
+            A collection of graduation projects demonstrating algorithmic
+            problem-solving, data processing, and software engineering
+            principles using Python.
+          </p>
+          <div class="project-footer">
+            <a href="https://github.com/mhmd-baqir/graduation_projects" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="graduation-github-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              View Code
+            </a>
+          </div>
+          <div class="project-glow"></div>
+        </article>
+
+        <a href="https://github.com/mhmd-baqir?tab=repositories" target="_blank" rel="noopener" class="project-card view-all-card" id="view-all-repos-btn">
+          <div class="view-all-content">
+            <div class="view-all-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </div>
+            <h3>View All on GitHub</h3>
+            <p>Explore my complete repository collection</p>
+            <div class="view-all-arrow">&#x2192;</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Let's Talk</span>
+        <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+      </div>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3>Ready to build something great together?</h3>
+          <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!</p>
+          <div class="contact-links">
+            <a href="mailto:foxsti24@gmail.com" class="contact-link" id="contact-email-link">
+              <div class="contact-link-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <strong>Email</strong>
+                <span>foxsti24@gmail.com</span>
+              </div>
+            </a>
+            <a href="tel:07873334450" class="contact-link" id="contact-phone-link">
+              <div class="contact-link-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <strong>Phone</strong>
+                <span>07873334450</span>
+              </div>
+            </a>
+            <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener" class="contact-link" id="contact-github-link">
+              <div class="contact-link-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </div>
+              <div>
+                <strong>GitHub</strong>
+                <span>github.com/mhmd-baqir</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="logo-bracket">&lt;</span>MBN<span class="logo-bracket">/&gt;</span>
+      </div>
+      <p class="footer-copy">&#169; 2026 Mohammed Baqir Nazar. Crafted with &#10084;&#65039;</p>
+      <a href="https://github.com/mhmd-baqir" target="_blank" rel="noopener" class="footer-github" id="footer-github-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

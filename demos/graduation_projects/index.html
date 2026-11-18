@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام ترشيح الكتب بالذكاء الاصطناعي | مشروع التخرج</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #0b0914; --card: #161224; --border: rgba(255,255,255,0.08); --text: #f8fafc; --muted: #a1a1aa; --purple: #a855f7; --cyan: #38bdf8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .topbar { background: rgba(22,18,36,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0.85rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; }
+    .back-btn { padding: 0.45rem 1rem; border-radius: 99px; background: rgba(168,85,247,0.15); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.35); text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+    .back-btn:hover { background: var(--purple); color: #fff; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem; }
+    .hero-ai { text-align: center; margin-bottom: 2.5rem; }
+    .hero-ai h1 { font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .hero-ai p { color: var(--muted); max-width: 650px; margin: 0 auto 1.5rem; }
+    .ai-box { background: var(--card); border: 1px solid rgba(168,85,247,0.35); border-radius: 18px; padding: 1.5rem; max-width: 780px; margin: 0 auto 2.5rem; }
+    .search-row { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+    .search-row input { flex: 1; padding: 0.85rem 1.1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.95rem; }
+    .btn-ai { padding: 0.85rem 1.5rem; border-radius: 12px; border: none; background: linear-gradient(135deg, #a855f7, #6366f1); color: #fff; font-family: inherit; font-weight: 800; cursor: pointer; }
+    .interests { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+    .chip { padding: 0.4rem 0.9rem; border-radius: 99px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--muted); cursor: pointer; font-family: inherit; font-size: 0.85rem; font-weight: 700; }
+    .chip.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+    .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; }
+    .book-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.35rem; display: flex; flex-direction: column; gap: 0.65rem; transition: transform 0.2s; }
+    .book-card:hover { transform: translateY(-4px); border-color: rgba(168,85,247,0.45); }
+    .match-badge { align-self: flex-start; font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 99px; background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+    .book-title { font-size: 1.15rem; font-weight: 800; }
+    .book-author { font-size: 0.85rem; color: var(--cyan); }
+    .book-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; flex-grow: 1; }
+    .book-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 0.8rem; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="font-size:1.5rem;">🤖</span>
+      <div>
+        <div style="font-weight:800;">AI Book Recommender</div>
+        <div style="font-size:0.75rem;color:var(--muted);">مشروع التخرج • Python + Flask + ML</div>
+      </div>
+    </div>
+    <a href="../../index.html" class="back-btn">← العودة للبورتفوليو</a>
+  </header>
+
+  <div class="container">
+    <div class="hero-ai">
+      <h1>محرك التوصية الذكي للكتب 📚</h1>
+      <p>اختر اهتماماتك أو اكتب موضوعاً ليقوم نموذج الذكاء الاصطناعي بحساب نسبة التطابق وترشيح أفضل الكتب لك فوراً.</p>
+    </div>
+
+    <div class="ai-box">
+      <div class="search-row">
+        <input id="aiQuery" placeholder="مثال: أريد تعلم الذكاء الاصطناعي، أو رواية خيال علمي..." />
+        <button class="btn-ai" onclick="runRecommender()">تحليل وترشيح ✨</button>
+      </div>
+      <div class="interests">
+        <button class="chip active" onclick="toggleGenre('الكل', this)">الكل</button>
+        <button class="chip" onclick="toggleGenre('برمجة وذكاء اصطناعي', this)">برمجة وذكاء اصطناعي</button>
+        <button class="chip" onclick="toggleGenre('روايات وأدب', this)">روايات وأدب</button>
+        <button class="chip" onclick="toggleGenre('تطوير الذات', this)">تطوير الذات</button>
+        <button class="chip" onclick="toggleGenre('علوم وتاريخ', this)">علوم وتاريخ</button>
+      </div>
+    </div>
+
+    <div class="books-grid" id="booksGrid"></div>
+  </div>
+
+  <script>
+    const BOOKS = [
+      { title: "مقدمة في تعلم الآلة والذكاء الاصطناعي", author: "د. طارق منصور", genre: "برمجة وذكاء اصطناعي", rating: 4.9, match: 98, desc: "شرح تطبيقي شامل لخوارزميات التصنيف، التوصية، والشبكات العصبية بلغة Python." },
+      { title: "شفرة نظيفة (Clean Code)", author: "روبرت مارتن", genre: "برمجة وذكاء اصطناعي", rating: 4.8, match: 95, desc: "الدليل الهندسي الأهم لكتابة برمجيات نظيفة وقابلة للصيانة والتطوير." },
+      { title: "العادات الذرية (Atomic Habits)", author: "جيمس كلير", genre: "تطوير الذات", rating: 4.9, match: 94, desc: "منهجية علمية لبناء عادات يومية صغيرة تصنع نتائج استثنائية على المدى الطويل." },
+      { title: "يوتوبيا", author: "أحمد خالد توفيق", genre: "روايات وأدب", rating: 4.6, match: 91, desc: "رواية ديستوبية مشوقة تستشرف المستقبل الاجتماعي والتفاوت الطبقي بأسلوب أدبي بديع." },
+      { title: "تاريخ موجز للزمان", author: "ستيفن هوكينج", genre: "علوم وتاريخ", rating: 4.8, match: 93, desc: "رحلة مبسطة في أسرار الكون، الثقوب السوداء، ونظرية النسبية." },
+      { title: "هندسة البرمجيات الحديثة وتصميم الأنظمة", author: "مارتن كليمان", genre: "برمجة وذكاء اصطناعي", rating: 4.9, match: 97, desc: "تصميم الأنظمة الموزعة وقواعد البيانات عالية الأداء لتطبيقات الويب الحديثة." }
+    ];
+
+    let activeGenre = 'الكل';
+
+    function toggleGenre(genre, btn) {
+      activeGenre = genre;
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      runRecommender();
+    }
+
+    function runRecommender() {
+      const q = document.getElementById('aiQuery').value.trim().toLowerCase();
+      const grid = document.getElementById('booksGrid');
+      grid.innerHTML = '';
+
+      const filtered = BOOKS.filter(b => {
+        const gMatch = activeGenre === 'الكل' || b.genre === activeGenre;
+        const qMatch = !q || b.title.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q) || b.genre.toLowerCase().includes(q);
+        return gMatch && qMatch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:3rem;">لم يجد المحرك كتباً مطابقة لبحثك، جرّب كلمة أخرى.</div>';
+        return;
+      }
+
+      filtered.forEach(b => {
+        const card = document.createElement('div');
+        card.className = 'book-card';
+        card.innerHTML = `
+          <span class="match-badge">🎯 تطابق ذكي ${b.match}%</span>
+          <div class="book-title">${b.title}</div>
+          <div class="book-author">✍️ ${b.author} • ${b.genre}</div>
+          <div class="book-desc">${b.desc}</div>
+          <div class="book-footer">
+            <span>⭐ ${b.rating} / 5.0</span>
+            <button class="chip" onclick="alert('تم حفظ «${b.title}» في قائمة قراءاتك!')">+ حفظ للقراءة</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    runRecommender();
+  </script>
+</body>
+</html>

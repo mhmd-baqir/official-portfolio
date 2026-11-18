@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام إدارة عيادة الأسنان | Dental Clinic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #071318; --card: #0e222b; --border: rgba(255,255,255,0.08); --text: #f1f5f9; --muted: #94a3b8; --teal: #14b8a6; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .topbar { background: rgba(14,34,43,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0.85rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; }
+    .back-btn { padding: 0.45rem 1rem; border-radius: 99px; background: rgba(20,184,166,0.15); color: #5eead4; border: 1px solid rgba(20,184,166,0.35); text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+    .back-btn:hover { background: var(--teal); color: #042f2e; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 1.75rem 1.25rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem; }
+    @media (max-width: 850px) { .grid-2 { grid-template-columns: 1fr; } }
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+    .panel h2 { font-size: 1.25rem; margin-bottom: 1rem; color: #5eead4; }
+    .fg { margin-bottom: 0.9rem; }
+    .fg label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .fg input, .fg select { width: 100%; padding: 0.65rem 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: inherit; }
+    .btn-book { width: 100%; padding: 0.8rem; border-radius: 10px; border: none; background: var(--teal); color: #042f2e; font-family: inherit; font-weight: 800; font-size: 1rem; cursor: pointer; }
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .srv-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.15rem; text-align: center; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { text-align: right; padding: 0.7rem 0.5rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 700; }
+    .st-pill { padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 800; background: rgba(20,184,166,0.18); color: #5eead4; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="font-size:1.5rem;">🦷</span>
+      <div>
+        <div style="font-weight:800;">عيادة الابتسامة لطب الأسنان</div>
+        <div style="font-size:0.75rem;color:var(--muted);">PHP + MySQL • حجز المواعيد وسجلات المرضى</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.5rem;">
+      <a href="./lab.html" class="back-btn">🔬 صفحة المختبر التخصصي</a>
+      <a href="../../index.html" class="back-btn">← البورتفوليو</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="services">
+      <div class="srv-card"><div style="font-size:2rem;">✨</div><h4>تبييض الأسنان بالليزر</h4><div style="color:var(--muted);font-size:0.85rem;">جلسة واحدة فورية</div></div>
+      <div class="srv-card"><div style="font-size:2rem;">🔩</div><h4>زراعة الأسنان</h4><div style="color:var(--muted);font-size:0.85rem;">تقنية سويسرية مضمونة</div></div>
+      <div class="srv-card"><div style="font-size:2rem;">😁</div><h4>تقويم الأسنان الشفاف</h4><div style="color:var(--muted);font-size:0.85rem;">متابعة شهرية دقيقة</div></div>
+      <div class="srv-card"><div style="font-size:2rem;">🩺</div><h4>حشوات تجميلية</h4><div style="color:var(--muted);font-size:0.85rem;">بدون ألم</div></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>📅 حجز موعد جديد</h2>
+        <div class="fg"><label>اسم المريض الكامل</label><input id="pName" placeholder="مثال: علي حسين" /></div>
+        <div class="fg"><label>رقم الهاتف</label><input id="pPhone" placeholder="0770xxxxxxx" /></div>
+        <div class="fg"><label>الخدمة المطلوبة</label>
+          <select id="pService">
+            <option>تبييض الأسنان بالليزر</option>
+            <option>فحص واستشارة عامة</option>
+            <option>زراعة الأسنان</option>
+            <option>تقويم الأسنان</option>
+            <option>حشوة وعلاج عصب</option>
+          </select>
+        </div>
+        <div class="fg"><label>التاريخ والوقت</label><input id="pDate" type="date" /></div>
+        <button class="btn-book" onclick="bookNow()">تأكيد الحجز الآن ✔</button>
+      </div>
+
+      <div class="panel">
+        <h2>📋 جدول المواعيد المسجلة (لوحة العيادة)</h2>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr><th>المريض</th><th>الخدمة</th><th>التاريخ</th><th>الحالة</th></tr>
+            </thead>
+            <tbody id="apptTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let appts = JSON.parse(localStorage.getItem('mb_dental_appts')) || [
+      { name: 'مصطفى كامل', service: 'تبييض الأسنان بالليزر', date: '2026-11-20', status: 'مؤكد' },
+      { name: 'زهراء فاضل', service: 'تقويم الأسنان', date: '2026-11-21', status: 'مؤكد' },
+      { name: 'حيدر علاء', service: 'حشوة وعلاج عصب', date: '2026-11-22', status: 'قيد الانتظار' }
+    ];
+
+    document.getElementById('pDate').valueAsDate = new Date();
+
+    function render() {
+      localStorage.setItem('mb_dental_appts', JSON.stringify(appts));
+      const tbody = document.getElementById('apptTable');
+      tbody.innerHTML = '';
+      appts.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><strong>${a.name}</strong></td><td>${a.service}</td><td>${a.date}</td><td><span class="st-pill">${a.status}</span></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function bookNow() {
+      const name = document.getElementById('pName').value.trim();
+      const service = document.getElementById('pService').value;
+      const date = document.getElementById('pDate').value || '2026-11-20';
+      if (!name) return alert('يرجى إدخال اسم المريض');
+      appts.unshift({ name, service, date, status: 'مؤكد' });
+      document.getElementById('pName').value = '';
+      render();
+      alert('تم تسجيل الموعد بنجاح في جدول العيادة!');
+    }
+
+    render();
+  </script>
+</body>
+</html>
